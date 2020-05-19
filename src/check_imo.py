@@ -9,31 +9,18 @@ import pandas as pd
 static = pd.read_csv("CCG_AIS_Static_Data_2018-05-01.csv")
 #dynamic = pd.read_csv("dynamic.csv")
 
-
-# In[3]:
-
-
 data_s = static
 
-# In[7]:
 
 
 data_s = data_s.drop_duplicates(["Region","Station_Location","AIS_Channel","AIS_Class","Message_Type","Repeat_Indicator","MMSI","IMO_number","Call_Sign","Vessel_Name","Type_of_Ship_and_Cargo","Dimension_to_Bow_meters","Dimension_to_Stern_meters","Dimension_to_Port_meters","Dimension_to_Starboard_meters","Vessel_Length_meters","Vessel_Width_meters","Draught_decimeters","Destination"], keep="last")
 
 
-# In[8]:
-
 
 data_s['IMO_number'] = data_s['IMO_number'].fillna(0)
 
-
-# In[9]:
-
-
 data_s['IMO_number'] = data_s['IMO_number'].astype(int)
 
-
-# In[17]:
 
 
 def getImoCheck(imo):
@@ -74,28 +61,14 @@ def getImoCheck(imo):
     return retVal
 
 
-# In[18]:
-
-
 imo = 9553402
 
 getImoCheck(imo)
 
 
-# In[19]:
-
-
 data_s["IMO_status"] = data_s.apply(lambda x: getImoCheck(x['IMO_number']), axis=1)
 
 
-# In[21]:
-
-
 data_s.to_csv("static_verified_imo.csv",index=False)
-
-
-# In[ ]:
-
-
 
 

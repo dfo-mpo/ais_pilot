@@ -3,11 +3,9 @@
 
 # In[1]:
 
+# clean speed data
 
 import pandas as pd
-
-# In[4]:
-
 
 dynamic = pd.read_csv("dynamic.csv")
 dynamic = dynamic[dynamic.Speed_Over_Ground_SOG_knots != 0.0]
